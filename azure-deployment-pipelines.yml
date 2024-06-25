@@ -1,0 +1,5 @@
+Command Line Script
+
+sudo cp -r $(System.DefaultWorkingDirectory)/_persevcareers.resources-netflix/drop/*.war /var/lib/tomcat9/webapps
+
+sudo systemctl restart tomcat9
