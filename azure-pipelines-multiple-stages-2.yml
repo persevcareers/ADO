@@ -5,6 +5,7 @@ pool:
   name: build-env-servers
 
 stages:
+- checkout: self
 - stage: Build
   jobs:
   - job: BuildJob
@@ -24,15 +25,6 @@ stages:
         SourceFolder: '$(Build.SourcesDirectory)/target/'
         Contents: 'netflix.war'
         TargetFolder: '/home/praveen/mypipelinework/2/a/'
-
-- stage: PrintArtifactDir
-  dependsOn: CopyFiles
-  jobs:
-  - job: PrintArtifactDirJob
-    steps:
-    - script: |
-        echo "Artifact Staging Directory: $BUILD_ARTIFACTSTAGINGDIRECTORY"
-      displayName: 'Print Artifact Staging Directory'
 
 - stage: PublishArtifacts
   dependsOn: PrintArtifactDir
