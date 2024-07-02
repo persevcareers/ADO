@@ -1,0 +1,29 @@
+# logging into Azure account
+az login
+#RG creation
+az group create --name <resource-group-name> --location <azure-region>
+az group create --name dev-cluster --location centralindia
+#cluster creation
+#Parameters and Options:
+--resource-group dev-cluster:
+
+Specifies the Azure resource group where the AKS cluster will be created (dev-cluster in this case). A resource group is a logical container for grouping Azure resources.
+--name dev-env:
+
+Defines the name of the AKS cluster (dev-env in this case). This will be the name used to identify your AKS cluster within Azure.
+--node-count 2:
+
+Specifies the initial number of nodes (virtual machines) in the AKS cluster. Nodes are where your Kubernetes pods (containers) will run. Here, the cluster will start with 2 nodes.
+--enable-addons monitoring:
+
+Enables the Kubernetes monitoring add-on for the AKS cluster. This add-on sets up Azure Monitor for containers, which provides monitoring and logging capabilities for your Kubernetes cluster and applications.
+--generate-ssh-keys:
+
+Generates SSH public and private key files that you can use to authenticate with the nodes in your AKS cluster. These keys are generated locally and saved to ~/.ssh/id_rsa and ~/.ssh/id_rsa.pub by default.
+az aks create \
+  --resource-group dev-cluster \
+  --name dev-env \
+  --node-count 2 \
+  --enable-addons monitoring \
+  --generate-ssh-keys
+
