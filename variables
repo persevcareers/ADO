@@ -1,0 +1,19 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  msg: 'Hello, World!'
+  anotherVariable: 'Azure Pipelines'
+
+jobs:
+- job: PrintVariables
+  steps:
+  - script: |
+      echo "System.Debug: $(System.Debug)"
+      echo "Build.SourceBranch: $(Build.SourceBranch)"
+      echo "Custom variable msg: $(msg)"
+      echo "Custom variable anotherVariable: $(anotherVariable)"
+    displayName: 'Print variables'
