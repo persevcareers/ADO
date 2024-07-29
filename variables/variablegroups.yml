@@ -1,0 +1,16 @@
+trigger:
+- main
+
+pool:
+  name: default
+
+variables:
+- group: shared-variables
+
+jobs:
+- job: UserDefinedVariables
+  steps:
+  - script: |
+      echo "NGINX version: $(nginx_version)"
+      echo "Deploy environment: $(deploy_env)"
+    displayName: 'Utilizing Variables from Variable Group'
