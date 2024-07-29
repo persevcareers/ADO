@@ -13,6 +13,7 @@ jobs:
 - job: UserDefinedVariables
   steps:
   - script: |
+      echo "##vso[task.setvariable variable=deploy]test"
       echo "nginx version : $(nginx_version)"
       echo "deploying to : $(deploy)"
     displayName: 'utilizing variables'
