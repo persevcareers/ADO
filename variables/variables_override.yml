@@ -1,0 +1,20 @@
+trigger:
+- main
+
+pool:
+  name: default
+
+variables:
+  nginx_version: '2.4.8'
+  deploy: 'dev'
+
+jobs:
+- job: UserDefinedVariables
+  steps:
+  - script: |
+      echo "Original deploy value: $(deploy)"
+      echo "##vso[task.setvariable variable=deploy]test"
+    displayName: 'Set New Deploy Value'
+  - script: |
+      echo "New deploy value: $(deploy)"
+    displayName: 'Show Overridden Deploy Value'
