@@ -2,18 +2,17 @@ trigger:
 - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: default
+
 
 variables:
-  msg: 'Hello, World!'
-  anotherVariable: 'Azure Pipelines'
+  nginx_version: '2.4.8'
+  deploy: 'dev'
 
 jobs:
-- job: PrintVariables
+- job: UserDefinedVariables
   steps:
   - script: |
-      echo "System.Debug: $(System.Debug)"
-      echo "Build.SourceBranch: $(Build.SourceBranch)"
-      echo "Custom variable msg: $(msg)"
-      echo "Custom variable anotherVariable: $(anotherVariable)"
-    displayName: 'Print variables'
+      echo "nginx version : $(nginx_version)"
+      echo "deploying to : $(deploy)"
+    displayName: 'utilizing variables'
