@@ -1,11 +1,11 @@
 trigger:
 - main
 stages:
-- stage: Build
+- stage: BuildandPublishArtifact
   jobs:
-  - job: BuildJob
+  - job: Build
     pool:
-      name: build-env-servers
+      name: default
     steps:
     - task: Maven@3
       inputs:
@@ -14,12 +14,8 @@ stages:
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(Build.SourcesDirectory)/target/'
-        Contents: 'netflix.war'
-        TargetFolder: '/home/praveen/mypipelinework/2/a/'
-
-    - script: |
-        echo "Artifact Staging Directory: $BUILD_ARTIFACTSTAGINGDIRECTORY"
-      displayName: 'Print Artifact Staging Directory'
+        Contents: 'perseverance.war'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/'
 
     - task: PublishBuildArtifacts@1
       inputs:
