@@ -1,1 +1,30 @@
+trigger:
+- main
 
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  # Define a variable to store the Key Vault name
+  keyVaultName: 'azurekeyvaultdev01'
+  
+  # Define a variable to store the name of the secret you want to retrieve
+  secretName: 'version'
+
+steps:
+- task: AzureKeyVault@2
+  inputs:
+    azureSubscription: '<your-service-connection>'
+    KeyVaultName: '$(keyVaultName)'
+    SecretsFilter: '$(secretName)'
+  name: FetchSecrets
+
+- script: |
+    # Retrieve the secret value and set it as a pipeline variable
+    echo "##vso[task.setvariable variable=version;]$(FetchSecrets.secretName)"
+  displayName: 'Set version variable from Key Vault'
+
+- script: |
+    # using of the version variable
+    echo "The version retrieved from Key Vault is: $(version)"
+  displayName: 'Display the version variable'
